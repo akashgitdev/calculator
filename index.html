@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .co {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        width: 56px;
+        height: 50px;
+        gap: 6px;
+        padding-top: 7.5px;
+        margin-left: 3px;
+        border-radius: 25px;
+        font-size: 20px;
+        box-shadow:4px 6px #38598b;
+        
+      }
+      #ip1 {
+        width: 250px;
+        height: 51px;
+        border: 2px solid black;
+        margin-left: 3.8px;
+      }
+      .back{
+        background-color: rgb(97, 200, 190);
+        background-image: linear-gradient(90deg,#a2a8d3,#38598b );
+        height: 350px;
+        width: 270px;
+        padding: 10px;
+        padding-top: 20px;
+        border-radius: 20px;
+        border: 4px solid  #41506b;
+        box-shadow: 2px  2px #41506b;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="back">
+    <form id="form1" onsubmit="evaluation(event)">
+      <input type="text" id="ip1" readonly onfocus="turnOn()" />
+      <div class="co">
+        
+        <input class="co" type="button" value="C" onclick="clearDisplay()" />
+        <input class="co" type="button" value="+" onclick="input(event)" />
+        <input class="co" type="button" value="-" onclick="input(event)" />
+        <input class="co" type="button" value="*" onclick="input(event)" />
+        <input class="co" type="button" value="1" onclick="input(event)" />
+        <input class="co" type="button" value="2" onclick="input(event)" />
+        <input class="co" type="button" value="3" onclick="input(event)" />
+        <input class="co" type="button" value="/" onclick="input(event)" />
+        <input class="co" type="button" value="4" onclick="input(event)" />
+        <input class="co" type="button" value="5" onclick="input(event)" />
+        <input class="co" type="button" value="6" onclick="input(event)" />
+        <input class="co" type="button" value="%" onclick="input(event)" />
+        <input class="co" type="button" value="7" onclick="input(event)" />
+        <input class="co" type="button" value="8" onclick="input(event)" />
+        <input class="co" type="button" value="9" onclick="input(event)" />
+        <input class="co" type="button" value="." onclick="input(event)" />
+        <input class="co" type="button" value="0" onclick="input(event)" />
+        <button  class="co"type="button" class="button"removeLast()">←</button>
+        <input class="co" type="submit" value="=" />
+        <input class="co"type="button" value="ON" onclick="turnOn()" />
+        
+      </div>
+    </form>
+  </div>
+    <p id="op"></p>
+    <script>
+      let op = document.getElementById("op");
+      let form = document.getElementById("form1");
+      let display = document.getElementById("ip1");
+      display.style.fontSize="28px"
+          
+      const input = (event) => {
+        display.style.fontSize="25px"
+        // Check if the message is currently displayed and clear it when any key is pressed
+        if (display.value === "Let's calculate your query!...") {
+          display.value = "";
+           display.style.fontSize="20px"
+        }
+        display.value += event.target.value;
+      };
+
+      const evaluation = (event) => {
+        event.preventDefault();
+        let res = eval(display.value);
+        display.value = res;
+        
+      };
+
+      function clearDisplay() {
+        display.value = "";
+      }
+
+      // Remove recent value
+      function removeLast() {
+        display.value = display.value.slice(0, -1);
+      }
+
+      function turnOn() {
+        // Show the message only if the display is empty
+        if (display.value === "") {
+          display.style.fontSize="15px"
+          display.value = "Let's calculate your query!...";
+        }
+      
+      }
+    </script>
+  </body>
+</html>
+
